@@ -56,5 +56,88 @@
 
 # 紀錄在 git repo 操作過程中，.git 檔案夾裡的變化，看看你可以觀察到什麼
 
-# commit message 應該怎麼寫比較好？應該有什麼 style 嗎？
 
+# Commit Message 應該怎麼寫比較好？應該有什麼 `style` 嗎？
+
+我在網路上找到一個名為**Conventional Commits**[（連結）](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13) 的規範，commit message 應遵循一個具體且清晰的結構。這樣可以提升 commit 記錄的可讀性，使團隊更容易追蹤變更。以下是這種風格的完整格式及說明：
+
+---
+
+## Commit Message 格式
+
+```bash
+<type>(<optional scope>): <description>
+
+<optional body>
+
+<optional footer>
+```
+
+### 1. 標題
+
+- **`<type>`**: 描述這次提交的類型，必填。
+- **`<optional scope>`**: 說明變更的範圍（模組、功能），可選。
+- **`<description>`**: 簡短描述這次變更，必填，應使用祈使句現在式，不超過 50 個字元。
+
+### 2. Body
+
+- 可選部分，用來詳細說明這次提交的動機，對比過去行為。
+- 應使用祈使句現在式，例如：「change」而非「changed」或「changes」。
+- 可以在這裡提到相關 issue ID，並解釋問題解決方案。
+
+### 3. Footer
+
+- 可選部分，提到任何破壞性變更（breaking changes）或是這次提交參考的 issue。
+- 若有破壞性變更，應以 `BREAKING CHANGES:` 開頭，並解釋具體的變更影響。
+
+---
+
+## Commit Message 的類型 (`<type>`)
+
+| Type      | 說明 |
+|-----------|----------------|
+| `feat`    | 新增功能或移除功能。 |
+| `fix`     | 修復 bug。 |
+| `refactor`| 代碼重構，不改變 API 行為。 |
+| `perf`    | 提升效能的代碼重構。 |
+| `style`   | 不影響功能的修改（空白、格式、分號等）。 |
+| `test`    | 添加或修正測試代碼。 |
+| `docs`    | 僅影響文件的修改。 |
+| `build`   | 修改構建工具、CI 管線、依賴、版本等。 |
+| `ops`     | 與基礎設施、部署等運維相關的修改。 |
+| `chore`   | 雜項，如修改 `.gitignore` 等。 |
+
+---
+
+## Breaking Changes 指示
+
+- 若提交包含破壞性變更，在 `type` 後加入 `!`。
+- 在 Footer 中詳細說明破壞性變更，使用 `BREAKING CHANGES:`。
+
+---
+
+## 範例
+
+```bash
+feat: add email notifications on new direct messages
+
+feat(shopping cart): add the amazing button
+
+feat!: remove ticket list endpoint
+
+BREAKING CHANGES: ticket endpoints no longer support listing all entities.
+
+fix(api): handle empty message in request body
+
+perf: decrease memory footprint for determining unique visitors by using HyperLogLog
+```
+
+---
+
+## 總結
+
+- **標題** 必須簡潔且明確，使用現在式動詞來描述變更。
+- **可選的 Body** 應該詳細說明變更的動機和對比過去的行為，並提到相關 issue。
+- **Footer** 用來記錄破壞性變更以及關聯的 issue 編號。
+
+這樣的規範有助於保持 commit 記錄的一致性，尤其在團隊合作和自動化流程中，`Conventional Commits` 是非常有用的標準。
