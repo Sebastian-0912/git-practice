@@ -86,7 +86,6 @@
 └── refs
     ├── heads
     └── tags
-
 ```
 
 創建一個資料夾`dir`後，`.git`結構如下：
@@ -118,7 +117,6 @@
 └── refs
     ├── heads
     └── tags
-
 ```
 
 再創建一個檔案，`./dir/file`後，`.git`結構如下：
@@ -186,7 +184,7 @@
 └── refs
     ├── heads
     └── tags
-```c
+```
 
 `git commit -m "first commit"`指令後，`.git`結構如下：
 
@@ -235,7 +233,6 @@
     │   └── master
     └── tags
 ```
-
 
 # Commit Message 應該怎麼寫比較好？應該有什麼 `style` 嗎？
 
