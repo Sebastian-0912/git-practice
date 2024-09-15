@@ -2,7 +2,7 @@
 
 ## 1. Blob
 
-- **Blob（Binary Large Object）** 是 Git 中存儲文件數據的物件，每個 blob 代表一個文件的內容，**不包含文件名或目錄結構**。
+- **Blob（Binary Large Object）** 是 Git 中儲存文件數據的物件，每個 blob 代表一個文件的內容，**不包含文件名或目錄結構**。
 - **Blob 的特點**：
   - 每個 blob 是文件的二進位內容，並根據文件內容生成一個 SHA-1 hash值作為唯一識別碼。
   - 當文件內容變更時，即使文件名相同，Git 也會生成一個新的 blob。
@@ -55,6 +55,186 @@
   **範例**：當你檢查出分支 `main` 時，`HEAD` 會指向 `main` 分支，並隨著 `main` 的提交更新而移動。
 
 # 紀錄在 git repo 操作過程中，.git 檔案夾裡的變化，看看你可以觀察到什麼
+
+我做了一個實驗，首先`git init`創造一個`.git`目錄，可以觀察到目前的`.git`結構如下：
+
+```bash
+.
+├── HEAD
+├── config
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   ├── push-to-checkout.sample
+│   ├── sendemail-validate.sample
+│   └── update.sample
+├── info
+│   └── exclude
+├── objects
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+
+```
+
+創建一個資料夾`dir`後，`.git`結構如下：
+
+```bash
+├── HEAD
+├── config
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   ├── push-to-checkout.sample
+│   ├── sendemail-validate.sample
+│   └── update.sample
+├── info
+│   └── exclude
+├── objects
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+
+```
+
+再創建一個檔案，`./dir/file`後，`.git`結構如下：
+
+```bash
+.git
+├── HEAD
+├── config
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   ├── push-to-checkout.sample
+│   ├── sendemail-validate.sample
+│   └── update.sample
+├── info
+│   └── exclude
+├── objects
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+```
+
+`git add .`指令後，`.git/objects`多了一個`e6`,`.git`結構如下：
+
+```bash
+.git
+├── HEAD
+├── config
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   ├── push-to-checkout.sample
+│   ├── sendemail-validate.sample
+│   └── update.sample
+├── index
+├── info
+│   └── exclude
+├── objects
+│   ├── e6
+│   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+```c
+
+`git commit -m "first commit"`指令後，`.git`結構如下：
+
+```bash
+.git
+├── COMMIT_EDITMSG
+├── HEAD
+├── config
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   ├── push-to-checkout.sample
+│   ├── sendemail-validate.sample
+│   └── update.sample
+├── index
+├── info
+│   └── exclude
+├── logs
+│   ├── HEAD
+│   └── refs
+│       └── heads
+│           └── master
+├── objects
+│   ├── 2f
+│   │   └── b0c97492f580acf34fc94c5af7388b7ec28e3e
+│   ├── b4
+│   │   └── c3cc91598b6469bf7036502b8ca2bd563b0d0a
+│   ├── df
+│   │   └── 2b8fc99e1c1d4dbc0a854d9f72157f1d6ea078
+│   ├── e6
+│   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    │   └── master
+    └── tags
+```
 
 
 # Commit Message 應該怎麼寫比較好？應該有什麼 `style` 嗎？
@@ -122,14 +302,16 @@
 feat: add email notifications on new direct messages
 
 feat(shopping cart): add the amazing button
+```
+
+```bash
 
 feat!: remove ticket list endpoint
 
-BREAKING CHANGES: ticket endpoints no longer support listing all entities.
+refers to JIRA-1337
 
-fix(api): handle empty message in request body
+BREAKING CHANGES: ticket enpoints no longer supports list all entites.
 
-perf: decrease memory footprint for determining unique visitors by using HyperLogLog
 ```
 
 ---
