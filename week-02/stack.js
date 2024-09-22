@@ -14,7 +14,7 @@ export default class Stack {
 
   // 移除並回傳 stack 頂部的元素
   pop() {
-		this.#items.pop();
+		return this.#items.pop();
   }
 
   // 回傳 stack 頂部的元素，但不移除它
