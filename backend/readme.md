@@ -115,8 +115,11 @@
 ---
 
 ### 5. 範例程式中用 require，但上週的 Stack 是用 import/export，這兩種分別是 JavaScript 引用模組的兩種方式: CJS vs ESM，這兩者分別怎麼用？
+以下內容參考自[連結](https://vocus.cc/article/649cc0e0fd89780001a7d34d)
 
 - **CJS（CommonJS）**：
+CJS 是 CommonJS 的模塊系統，最初為 Node.js 開發，主要用於伺服器端，但後來也被廣泛應用於前端開發中。CJS 使用 require 函數來導入模塊，並透過 module.exports 或 exports 對象來導出模塊內容。
+
   - 用 `require()` 來引用模組，並用 `module.exports` 來匯出。
   - 範例：
     ```js
@@ -125,11 +128,20 @@
     ```
 
 - **ESM（ECMAScript Module）**：
+ESM 是從 ECMAScript 6（ES6）開始引入的標準化模塊系統，成為 JavaScript 語言規範的一部分。
+
   - 用 `import/export` 來管理模組，這是 ES6 引入的標準化模組語法。
   - 範例：
     ```js
-    import express from 'express';      // 匯入
-    export default someFunction;        // 匯出
+      // math.js
+      export function add(a, b) {
+        return a + b;
+      }
+
+      // 導入模塊
+      // main.js
+      import { add } from './math.js';
+      console.log(add(2, 3)); // 輸出: 5
     ```
 
 - **兩者的區別**：
