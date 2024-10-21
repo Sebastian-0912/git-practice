@@ -20,7 +20,7 @@ which 指令用來顯示某個命令的可執行檔案的路徑。例如，which
 ## Question B
 
 1. **在 Readme 中提供 instance 的 public IP，我會連線過去檢查，所以要保持主機是一直在啟動中**
-`ubuntu@18.181.193.21`。
+`ubuntu@54.199.86.208`。
 
 2. **什麼是 instance type?**
 Instance type 是指 AWS EC2 instance 的硬體配置，例如 CPU、記憶體、儲存空間和網路容量。如這次的 t2.micro。[參考連結](https://aws.amazon.com/tw/ec2/instance-types/)
